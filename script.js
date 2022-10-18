@@ -15,6 +15,7 @@ const people = [
 
 function filterArray(array, callback) {
     const resultingArray = []
+        // Write your filtering logic here
     for (let item of array) {
         const shouldBeIncluded = callback(item)
         if (shouldBeIncluded) {
@@ -23,3 +24,10 @@ function filterArray(array, callback) {
     }
     return resultingArray
 }
+
+
+
+const peopleWithPets = filterArray(people, function(person) {
+    return person.hasPet
+})
+console.log(peopleWithPets)

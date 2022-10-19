@@ -6,6 +6,26 @@ function handleClick() {
 
 document.getElementById("new-deck").addEventListener("click", handleClick)
 
+// function callback() {
+//     console.log("I finally ran!")
+// }
+
+// setTimeout(callback, 2000)
+
+// const people = [
+//     { name: "Jack", hasPet: true },
+//     { name: "Jill", hasPet: false },
+//     { name: "Alice", hasPet: true },
+//     { name: "Bob", hasPet: false },
+// ]
+
+// function gimmeThePets(number) {
+//     return person.hasPet
+// }
+
+// const peopleWithPets = people.filter(gimmeThePets)
+// console.log(peopleWithPets)
+
 const people = [
     { name: "Jack", hasPet: true },
     { name: "Jill", hasPet: false },
@@ -24,7 +44,6 @@ function filterArray(array, callback) {
     }
     return resultingArray
 }
-
 
 
 const peopleWithPets = filterArray(people, function(person) {

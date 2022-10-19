@@ -30,4 +30,5 @@ function filterArray(array, callback) {
 const peopleWithPets = filterArray(people, function(person) {
     return person.hasPet
 })
+
 console.log(peopleWithPets)

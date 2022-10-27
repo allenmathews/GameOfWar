@@ -1,51 +1,43 @@
-let deckId
-const cardsContainer = document.getElementById("cards")
-const newDeckBtn = document.getElementById("new-deck")
-const drawCardBtn = document.getElementById("draw-cards")
-const header = document.getElementById("header")
-const remainingText = document.getElementById("remaining")
-
-function handleClick() {
-    fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            deckId = data.deck_id
-            console.log(deckId)
-        })
-}
-
-newDeckBtn.addEventListener("click", handleClick)
-
-
-drawCardBtn.addEventListener("click", () => {
-    fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
-        .then(res => res.json())
-        .then(data => {
-            remainingText.textContent = `Remaining cards: ${data.remaining}`
-            cardsContainer.children[0].innerHTML = `
-                <img src=${data.cards[0].image} class="card" />
+fetch("https://apis.scrimba.com/jsonplaceholder/posts")
+    .then(res => res.json())
+    .then(data => {
+        const postsArr = data.slice(0, 5)
+        let html = ""
+        for (let post of postsArr) {
+            html += `
+                <h3 class="blah">${post.title}</h3>
+                <p>${post.body}</p>
+                <hr />
             `
-            cardsContainer.children[1].innerHTML = `
-                <img src=${data.cards[1].image} class="card" />
+        }
+        document.getElementById("blog-list").innerHTML = html
+    })
+
+document.getElementById("new-post").addEventListener("submit", function(e) {
+    e.preventDefault()
+    const postTitle = document.getElementById("post-title").value
+    const postBody = document.getElementById("post-body").value
+    const data = {
+        title: postTitle,
+        body: postBody
+    }
+
+    const options = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+
+    fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
+        .then(res => res.json())
+        .then(post => {
+            document.getElementById("blog-list").innerHTML = `
+                <h3 class="blah">${post.title}</h3>
+                <p>${post.body}</p>
+                <hr />
+                ${document.getElementById("blog-list").innerHTML}
             `
-            const winnerText = determineCardWinner(data.cards[0], data.cards[1])
-            header.textContent = winnerText
         })
 })
-
-function determineCardWinner(card1, card2) {
-    const valueOptions = ["2", "3", "4", "5", "6", "7", "8", "9",
-        "10", "JACK", "QUEEN", "KING", "ACE"
-    ]
-    const card1ValueIndex = valueOptions.indexOf(card1.value)
-    const card2ValueIndex = valueOptions.indexOf(card2.value)
-
-    if (card1ValueIndex > card2ValueIndex) {
-        return "Card 1 wins!"
-    } else if (card1ValueIndex < card2ValueIndex) {
-        return "Card 2 wins!"
-    } else {
-        return "War!"
-    }
-}

@@ -17,9 +17,6 @@ function handleClick() {
 
 newDeckBtn.addEventListener("click", handleClick)
 
-
-
-
 drawCardBtn.addEventListener("click", () => {
     fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
         .then(res => res.json())
@@ -33,8 +30,13 @@ drawCardBtn.addEventListener("click", () => {
             `
             const winnerText = determineCardWinner(data.cards[0], data.cards[1])
             header.textContent = winnerText
+
+            if (data.remaining === 0) {
+                drawCardBtn.disabled = true
+            }
         })
 })
+
 
 function determineCardWinner(card1, card2) {
     const valueOptions = ["2", "3", "4", "5", "6", "7", "8", "9",

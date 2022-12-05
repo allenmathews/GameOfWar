@@ -16,7 +16,7 @@ body {
 }
 
 button {
-    background-color: #FFF100;
+    background-color: #c3c2a4;
     cursor: pointer;
     border: none;
 }
@@ -56,7 +56,7 @@ div.top {
 
 div.top>p {
     margin: 0;
-    margin-left: 10px;
+    margin-left: 7px;
 }
 
 button:disabled {

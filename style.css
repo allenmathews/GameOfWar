@@ -40,7 +40,7 @@ div.card-slot {
 }
 
 div.card-slot:nth-of-type(1) {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 img.card {

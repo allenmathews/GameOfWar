@@ -33,7 +33,7 @@ button.draw {
 }
 
 div.card-slot {
-    border: 1px solid black;
+    border: 1px solid rgb(134, 112, 112);
     border-radius: 5px;
     height: 120px;
     width: calc(120px * 5 / 7);
